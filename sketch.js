@@ -13,21 +13,30 @@ var Mover = function(m, x, y) {
     var f = p5.Vector.div(force, this.mass);
     this.acc.add(f);
   };
+  this.applyLerp = function(force) {
+    var f = p5.Vector.div(force, this.mass);
+    this.vel.add(f);
+  };
     
   this.update = function() {
     this.vel.add(this.acc);
     this.loc.add(this.vel);
     this.acc.mult(0);
-	//this.vel.mult(.999);
+	  this.vel.mult(.995);
+	//this.vel.constrain(this.vel,0,50);
   };
   this.decay = function() {
-	  this.vel.mult(.999);
+	  if(this.vel.x > 5){
+		  this.vel.x = 5;
+	  } if(this.vel.y > 5){
+		  this.vel.y = 5;
+	  } 
   };
 
   this.display = function() {
     noStroke();
     fill(255);
-    ellipse(this.loc.x, this.loc.y, this.mass/3, this.mass/3);
+    ellipse(this.loc.x, this.loc.y, this.mass, this.mass);
   };
 
   this.calculateAttraction = function(m) {
@@ -36,7 +45,7 @@ var Mover = function(m, x, y) {
     // Distance between objects
     var d = force.mag();
     // Limiting the distance to eliminate "extreme" results for very close or very far objects
-    d = constrain(d, 25.0, 100.0);
+    d = constrain(d, 75.0, 150.0);
     // Normalize vector (distance doesn't matter here, we just want this vector for direction                            
     force.normalize();
     // Calculate gravitional force magnitude
@@ -49,7 +58,7 @@ var Mover = function(m, x, y) {
   this.lerpy = function(m) {
 	var force = p5.Vector.sub(this.loc, m);
 	var d = force.mag();
-	d = constrain(d, 10.0, 50.0);
+	d = constrain(d, 20.0, 100.0);
 	force.normalize();
     var strength = (G * this.mass * 20) / (d * d);
 	force.mult(-strength);
@@ -57,67 +66,94 @@ var Mover = function(m, x, y) {
   }
 
   this.boundaries = function() {
-    if (this.loc.x > windowWidth-this.mass/2 || this.loc.x < this.mass/2) {
-      this.vel.x *= -1;
+    //this.loc.x = constrain(this.loc.x, this.mass/2, windowWidth-this.mass/2);
+    //this.loc.y = constrain(this.loc.y, this.mass/2, windowWHeight-this.mass/2);
+    if (this.loc.x > windowWidth+127 ) {
+      this.loc.x = -127;
     }
-    if (this.loc.y > windowHeight-this.mass/2 || this.loc.y < this.mass/2) {
-      this.vel.y *= -1;
+    if (this.loc.x < -127) {
+      this.loc.x = windowWidth+127;
+    }
+    if (this.loc.y > windowHeight+127 ) {
+      this.loc.y = -127;
+    }
+    if (this.loc.y < -127) {
+      this.loc.y = windowHeight+127;
     }
   }
 }
 
 var movers = [];
 
-var G = 5;
+var G = 10;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  for (var i = 0; i < 25; i++) {
-    movers[i] = new Mover(random(10, 20), random(20,width-20), random(20,height-20));
+  for (var i = 0; i < 50; i++) {
+    movers[i] = new Mover(random(1, 10), random(10,width-10), random(10,height-10));
   }
   strokeCap(SQUARE);
 }
 
-function draw() {
-  background(0);
+function mouseWheel() {
+  print(event.delta);
+  //move the square according to the vertical scroll amount
+  for (var i = 0; i < movers.length; i++) {
+    movers[i].loc.y += event.delta;
+    //movers[i].acc.y += event.delta*event.delta*.01;
+    //movers[i].loc.y = constrain(movers[i].loc.y, movers[i].mass/2, windowWHeight-movers[i].mass/2);
+  }
+  //uncomment to block page scrolling
+  //return false;
+}
+    
+function mouseReleased(){
+  for (var i = 0; i < movers.length; i++) {
+    var d = dist(movers[i].loc.x,movers[i].loc.y,mouseX,mouseY);
+    movers[i].acc.mult(1/d);
+  }
+}
 
+function draw() {
+  //background(0,0,0,33.3333);
+  background(0);
   for (var i = 0; i < movers.length; i++) {
     for (var j = 0; j < movers.length; j++) {
       if (i !== j) {
         var d = dist(movers[i].loc.x,movers[i].loc.y,movers[j].loc.x,movers[j].loc.y);
-        if (d < 200){
+        if (d < 127){
           var force = movers[j].calculateAttraction(movers[i]);
+          movers[j].applyLerp(force);
           movers[j].applyForce(force);
-          //force.mult(512/d);
+          //force.mult(512000/(d*movers[j].mass));
         }
-        if (d < 255 && d > 200){
+        if (d < 255 && d > 127){
           var force = movers[j].calculateAttraction(movers[i]);
           movers[i].applyForce(force);
+          //movers[i].applyLerp(force);
         }
         if (d < 255){
           strokeWeight(512/d);
           stroke(255,255,255,255-d);
-          line(movers[i].loc.x,movers[i].loc.y,movers[j].loc.x,movers[j].loc.y);
+          line(movers[i].loc.x,movers[i].loc.y,movers[j].loc.x,movers[j].loc.y,);
         }
+		if(mouseIsPressed ){
+		//var force = movers[i].lerpy(mousey);
+		//movers[i].applyLerp(force);
+		//movers[i].loc.lerp(mousey,md*.001/(movers[j].mass));
+		movers[i].loc.lerp(mousey,.1/md*movers[i].mass);
+		//movers[i].vel.mult(.1/(d*movers[j].mass));
+		} 
       }
     }
 	var mousey = createVector(mouseX,mouseY);
-	if(mouseIsPressed){
-		var force = movers[i].lerpy(mousey);
-		movers[i].applyForce(force);
-	} else {
-		movers[i].decay();
-	}
+	var mforce = p5.Vector.sub(movers[i].loc, mousey);
+	var md = mforce.mag();
+	movers[i].decay();
     movers[i].update();
     movers[i].display();
     movers[i].boundaries();
 	
   }
 }
-		
-function mouseReleased(){
-	for (var i = 0; i < movers.length; i++) {
-		var d = dist(movers[i].loc.x,movers[i].loc.y,mouseX,mouseY);
-		movers[i].vel.mult(1-50/d);
-	}
-}
+
