@@ -117,7 +117,11 @@ function mouseReleased(){
 function draw() {
   //background(0,0,0,33.3333);
   background(0);
+	var mousey = createVector(winMouseX,winMouseY);
+	
   for (var i = 0; i < movers.length; i++) {
+	  var mforce = p5.Vector.sub(movers[i].loc, mousey);
+	var md = mforce.mag();
     for (var j = 0; j < movers.length; j++) {
       if (i !== j) {
         var d = dist(movers[i].loc.x,movers[i].loc.y,movers[j].loc.x,movers[j].loc.y);
@@ -146,9 +150,7 @@ function draw() {
 		} 
       }
     }
-	var mousey = createVector(winMouseX,winMouseY);
-	var mforce = p5.Vector.sub(movers[i].loc, mousey);
-	var md = mforce.mag();
+	
 	movers[i].decay();
     movers[i].update();
     movers[i].display();
