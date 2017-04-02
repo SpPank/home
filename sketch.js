@@ -60,7 +60,7 @@ var Mover = function(m, x, y) {
   this.lerpy = function(m) {
 	var force = p5.Vector.sub(this.loc, m);
 	var d = force.mag();
-	d = constrain(d, 20.0, 100.0);
+	d = constrain(d, 1.0, 100.0);
 	force.normalize();
     var strength = (G * this.mass * 20) / (d * d);
 	force.mult(-strength);
@@ -128,7 +128,7 @@ function draw() {
         if (d < 127){
           var force = movers[j].calculateAttraction(movers[i]);
           movers[j].applyLerp(force);
-          movers[j].applyForce(force);
+          //movers[j].applyForce(force);
           //force.mult(512000/(d*movers[j].mass));
         }
         if (d < 255 && d > 127){
