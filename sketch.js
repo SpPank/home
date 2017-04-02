@@ -3,6 +3,8 @@
 // Daniel Shiffman
 // http://natureofcode.com
 
+var touching = false;
+
 var Mover = function(m, x, y) {
   this.mass = m;
   this.loc = createVector(x, y);
@@ -96,7 +98,7 @@ function setup() {
 }
 
 function mouseWheel() {
-  //print(event.delta);
+  print(event.delta);
   //move the square according to the vertical scroll amount
   for (var i = 0; i < movers.length; i++) {
     movers[i].loc.y += event.delta;
@@ -107,21 +109,19 @@ function mouseWheel() {
   //return false;
 }
     
-function mouseReleased(){
-  for (var i = 0; i < movers.length; i++) {
-    var d = dist(movers[i].loc.x,movers[i].loc.y,winMouseX,winMouseY);
-    movers[i].acc.mult(1/d);
-  }
+function mousePressed(){
+	touching = true;
 }
+
+function mouseReleased(){
+	touching = false;
+}
+
 
 function draw() {
   //background(0,0,0,33.3333);
   background(0);
-	var mousey = createVector(winMouseX,winMouseY);
-	
   for (var i = 0; i < movers.length; i++) {
-	  var mforce = p5.Vector.sub(movers[i].loc, mousey);
-	var md = mforce.mag();
     for (var j = 0; j < movers.length; j++) {
       if (i !== j) {
         var d = dist(movers[i].loc.x,movers[i].loc.y,movers[j].loc.x,movers[j].loc.y);
@@ -139,19 +139,23 @@ function draw() {
         if (d < 255){
           strokeWeight(512/d);
           stroke(255,255,255,255-d);
-          line(movers[i].loc.x,movers[i].loc.y,movers[j].loc.x,movers[j].loc.y);
+          line(movers[i].loc.x,movers[i].loc.y,movers[j].loc.x,movers[j].loc.y,);
         }
-		if(mouseIsPressed){
+	}
+	if(touching == true){
 		//var force = movers[i].lerpy(mousey);
 		//movers[i].applyLerp(force);
 		//movers[i].loc.lerp(mousey,md*.001/(movers[j].mass));
 		movers[i].loc.lerp(mousey,.1/md*movers[i].mass);
 		//movers[i].vel.mult(.1/(d*movers[j].mass));
-		} 
-	      movers[i].loc.lerp(touches[0],.1/md*movers[i].mass);
+		movers[i].loc.lerp(touches[0],.1/md*movers[i].mass);
+		 
       }
+	  
     }
-	
+	var mousey = createVector(mouseX,mouseY);
+	var mforce = p5.Vector.sub(movers[i].loc, mousey);
+	var md = mforce.mag();
 	movers[i].decay();
     movers[i].update();
     movers[i].display();
