@@ -139,7 +139,7 @@ function draw() {
         if (d < 255){
           strokeWeight((windowWidth+windowHeight)/(d*2));
           stroke(255,255,255,255-d);
-          line(movers[i].loc.x,movers[i].loc.y,movers[j].loc.x,movers[j].loc.y,);
+          line(movers[i].loc.x,movers[i].loc.y,movers[j].loc.x,movers[j].loc.y);
         }
 	}
 	if(touching == true){
