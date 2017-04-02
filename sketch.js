@@ -109,7 +109,7 @@ function mouseWheel() {
     
 function mouseReleased(){
   for (var i = 0; i < movers.length; i++) {
-    var d = dist(movers[i].loc.x,movers[i].loc.y,mouseX,mouseY);
+    var d = dist(movers[i].loc.x,movers[i].loc.y,winMouseX,winMouseY);
     movers[i].acc.mult(1/d);
   }
 }
@@ -137,7 +137,7 @@ function draw() {
           stroke(255,255,255,255-d);
           line(movers[i].loc.x,movers[i].loc.y,movers[j].loc.x,movers[j].loc.y);
         }
-		if(mouseIsPressed ){
+		if(mouseIsPressed){
 		//var force = movers[i].lerpy(mousey);
 		//movers[i].applyLerp(force);
 		//movers[i].loc.lerp(mousey,md*.001/(movers[j].mass));
@@ -146,7 +146,7 @@ function draw() {
 		} 
       }
     }
-	var mousey = createVector(mouseX,mouseY);
+	var mousey = createVector(winMouseX,winMouseY);
 	var mforce = p5.Vector.sub(movers[i].loc, mousey);
 	var md = mforce.mag();
 	movers[i].decay();
