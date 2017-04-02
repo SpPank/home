@@ -9,7 +9,7 @@ var Mover = function(m, x, y) {
   this.mass = m;
   this.loc = createVector(x, y);
   this.vel = createVector(0, 0);
-  this.acc = createVector(random(-1,1), random(-1,1));
+  this.acc = createVector(random(-0.2,0.2), random(-0.2,0.2));
    
   this.applyForce = function(force) {
     var f = p5.Vector.div(force, this.mass);
@@ -24,7 +24,7 @@ var Mover = function(m, x, y) {
     this.vel.add(this.acc);
     this.loc.add(this.vel);
     this.acc.mult(0);
-	  this.vel.mult(.998);
+	  this.vel.mult(.995);
 	//this.vel.constrain(this.vel,0,50);
   };
   this.decay = function() {
@@ -47,7 +47,7 @@ var Mover = function(m, x, y) {
     // Distance between objects
     var d = force.mag();
     // Limiting the distance to eliminate "extreme" results for very close or very far objects
-    d = constrain(d, 25.0, 75.0);
+    d = constrain(d, 75.0, 150.0);
     // Normalize vector (distance doesn't matter here, we just want this vector for direction                            
     force.normalize();
     // Calculate gravitional force magnitude
@@ -60,7 +60,7 @@ var Mover = function(m, x, y) {
   this.lerpy = function(m) {
 	var force = p5.Vector.sub(this.loc, m);
 	var d = force.mag();
-	d = constrain(d, 10.0, 25.0);
+	d = constrain(d, 20.0, 100.0);
 	force.normalize();
     var strength = (G * this.mass * 20) / (d * d);
 	force.mult(-strength);
@@ -70,8 +70,11 @@ var Mover = function(m, x, y) {
   this.boundaries = function() {
     //this.loc.x = constrain(this.loc.x, this.mass/2, windowWidth-this.mass/2);
     //this.loc.y = constrain(this.loc.y, this.mass/2, windowWHeight-this.mass/2);
-    if (this.loc.x > windowWidth-this.mass/2 || this.loc.x < this.mass/2) {
-      this.vel.x *= -1;
+    if (this.loc.x > windowWidth+127 ) {
+      this.loc.x = -127;
+    }
+    if (this.loc.x < -127) {
+      this.loc.x = windowWidth+127;
     }
     if (this.loc.y > windowHeight+127 ) {
       this.loc.y = -127;
@@ -114,13 +117,6 @@ function mouseReleased(){
 	touching = false;
 }
 
-function touchStarted(){
-	touching = true;
-}
-
-function touchEnded(){
-	touching = false;
-}
 
 function draw() {
   //background(0,0,0,33.3333);
@@ -141,7 +137,7 @@ function draw() {
           //movers[i].applyLerp(force);
         }
         if (d < 255){
-          strokeWeight((windowWidth+windowHeight)/(d*2));
+          strokeWeight(50000/d/d);
           stroke(255,255,255,255-d);
           line(movers[i].loc.x,movers[i].loc.y,movers[j].loc.x,movers[j].loc.y);
         }
@@ -153,8 +149,6 @@ function draw() {
 		movers[i].loc.lerp(mousey,.1/md*movers[i].mass);
 		//movers[i].vel.mult(.1/(d*movers[j].mass));
 		movers[i].loc.lerp(touches[0],.1/md*movers[i].mass);
-		
-		movers[i].loc.lerp(touches[1],.1/md*movers[i].mass);
 		 
       }
 	  
