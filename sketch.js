@@ -137,7 +137,7 @@ function draw() {
           //movers[i].applyLerp(force);
         }
         if (d < 255){
-          strokeWeight(512/d);
+          strokeWeight((windowWidth+windowHeight)/(d*2));
           stroke(255,255,255,255-d);
           line(movers[i].loc.x,movers[i].loc.y,movers[j].loc.x,movers[j].loc.y,);
         }
