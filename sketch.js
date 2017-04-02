@@ -24,7 +24,7 @@ var Mover = function(m, x, y) {
     this.vel.add(this.acc);
     this.loc.add(this.vel);
     this.acc.mult(0);
-	  this.vel.mult(.995);
+	  this.vel.mult(.998);
 	//this.vel.constrain(this.vel,0,50);
   };
   this.decay = function() {
@@ -88,7 +88,7 @@ var G = 10;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  for (var i = 0; i < 30; i++) {
+  for (var i = 0; i < 100; i++) {
     movers[i] = new Mover(random(1, 10), random(10,width-10), random(10,height-10));
   }
   strokeCap(SQUARE);
