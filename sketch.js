@@ -117,6 +117,13 @@ function mouseReleased(){
 	touching = false;
 }
 
+function touchStarted(){
+	touching = true;
+}
+
+function touchEnded(){
+	touching = false;
+}
 
 function draw() {
   //background(0,0,0,33.3333);
