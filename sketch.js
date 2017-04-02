@@ -96,7 +96,7 @@ function setup() {
 }
 
 function mouseWheel() {
-  print(event.delta);
+  //print(event.delta);
   //move the square according to the vertical scroll amount
   for (var i = 0; i < movers.length; i++) {
     movers[i].loc.y += event.delta;
