@@ -148,6 +148,7 @@ function draw() {
 		movers[i].loc.lerp(mousey,.1/md*movers[i].mass);
 		//movers[i].vel.mult(.1/(d*movers[j].mass));
 		} 
+	      movers[i].loc.lerp(touches[0],.1/md*movers[i].mass);
       }
     }
 	
