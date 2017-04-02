@@ -9,7 +9,7 @@ var Mover = function(m, x, y) {
   this.mass = m;
   this.loc = createVector(x, y);
   this.vel = createVector(0, 0);
-  this.acc = createVector(random(-0.2,0.2), random(-0.2,0.2));
+  this.acc = createVector(random(-1,1), random(-1,1));
    
   this.applyForce = function(force) {
     var f = p5.Vector.div(force, this.mass);
@@ -47,7 +47,7 @@ var Mover = function(m, x, y) {
     // Distance between objects
     var d = force.mag();
     // Limiting the distance to eliminate "extreme" results for very close or very far objects
-    d = constrain(d, 25.0, 150.0);
+    d = constrain(d, 25.0, 75.0);
     // Normalize vector (distance doesn't matter here, we just want this vector for direction                            
     force.normalize();
     // Calculate gravitional force magnitude
@@ -60,7 +60,7 @@ var Mover = function(m, x, y) {
   this.lerpy = function(m) {
 	var force = p5.Vector.sub(this.loc, m);
 	var d = force.mag();
-	d = constrain(d, 10.0, 100.0);
+	d = constrain(d, 10.0, 25.0);
 	force.normalize();
     var strength = (G * this.mass * 20) / (d * d);
 	force.mult(-strength);
