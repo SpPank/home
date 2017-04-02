@@ -88,7 +88,7 @@ var G = 10;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  for (var i = 0; i < 100; i++) {
+  for (var i = 0; i < 50; i++) {
     movers[i] = new Mover(random(1, 10), random(10,width-10), random(10,height-10));
   }
   strokeCap(SQUARE);
