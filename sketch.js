@@ -70,11 +70,8 @@ var Mover = function(m, x, y) {
   this.boundaries = function() {
     //this.loc.x = constrain(this.loc.x, this.mass/2, windowWidth-this.mass/2);
     //this.loc.y = constrain(this.loc.y, this.mass/2, windowWHeight-this.mass/2);
-    if (this.loc.x > windowWidth+127 ) {
-      this.loc.x = -127;
-    }
-    if (this.loc.x < -127) {
-      this.loc.x = windowWidth+127;
+    if (this.loc.x > windowWidth-this.mass/2 || this.loc.x < this.mass/2) {
+      this.vel.x *= -1;
     }
     if (this.loc.y > windowHeight+127 ) {
       this.loc.y = -127;
