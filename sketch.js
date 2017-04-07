@@ -36,7 +36,7 @@ var Mover = function(m, x, y) {
     noStroke();
     fill(255);
     ellipse(this.loc.x, this.loc.y, this.mass, this.mass);
-  };
+  }; 
 
   this.calculateAttraction = function(m) {
     // Calculate direction of force
