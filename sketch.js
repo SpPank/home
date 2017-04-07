@@ -89,7 +89,6 @@ var G = 10;
 function setup() {
   pixelDensity(1);
   createCanvas(windowWidth, windowHeight);
-  canvas.style('z-index', '-1');
   for (var i = 0; i < 50; i++) {
     movers[i] = new Mover(random(1, 10), random(10,width-10), random(10,height-10));
   }
