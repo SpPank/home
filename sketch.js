@@ -91,6 +91,11 @@ function webpage() {
     link("p5js.org");
 }
 
+var avel;
+var bvel;
+var arot;
+var brot;
+
 function setup() {
   pixelDensity(1);
   createCanvas(windowWidth, windowHeight);
@@ -100,7 +105,10 @@ function setup() {
   strokeCap(SQUARE);
   colorMode(RGB);
   ig = loadImage("ig.png");
-  
+  avel = createVector(random(-.1,.1),random(-.1,.1));
+  bvel = createVector(random(-.1,.1),random(-.1,.1));
+  arot = createVector(random(-.1,.1),random(-.1,.1));
+  brot = createVector(random(-.1,.1),random(-.1,.1));
   imageMode(CENTER);
 }
 
@@ -129,6 +137,14 @@ function mouseReleased(){
   touching = false;
 }
 
+var ax = 0; 
+  var ay = 0;
+  var axr= 0; 
+  var ayr= 0;
+  var bx = 0; 
+  var by = 0;
+  var bxr= 0;
+  var byr= 0;
 
 function draw() {
 
@@ -176,15 +192,31 @@ function draw() {
     movers[i].boundaries();
   
   }
+
+  ax += avel.x;
+  ay += avel.y;
+  axr+= radians(arot.x);
+  ayr+= radians(arot.y);
+
+  bx += bvel.x;
+  by += bvel.y;
+  bxr+= radians(brot.x);
+  byr+= radians(brot.y);
+
+
   textSize(300);
   fill(255);
   textAlign(CENTER);
   textFont("Futura");
   textStyle(NORMAL);
-  text("∞", width/2, height/3);
+  translate(width/2,height/3);
+  rotate(axr);
+  text("∞", ax, ay);
   textSize(24);
   textStyle(NORMAL);
-  text("this website is still in development.", width/2, height/2);
+  translate(0,height/5);
+  rotate(bxr);
+  text("this website is still in development.", bx, by);
   image(ig, width/2, height*.8, igSize, igSize);
   if (mouseX>width/2-64&&mouseX<width/2+64&&mouseY>height*.8-64&&mouseY<height*.8+64){
     igSize = 162;
