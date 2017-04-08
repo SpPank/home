@@ -99,7 +99,7 @@ function setup() {
   }
   strokeCap(SQUARE);
   colorMode(RGB);
-  ig = loadImage("images/ig.png");
+  ig = loadImage("ig.png");
   
   imageMode(CENTER);
 }
