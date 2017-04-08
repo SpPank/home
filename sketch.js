@@ -85,12 +85,6 @@ function setup() {
   colorMode(RGB);
 }
 
-function touchMoved() {
-  ellipse(mouseX, mouseY, 5, 5);
-  // prevent default
-  return false;
-}
-
 function mouseWheel() {
   print(event.delta);
   //move the square according to the vertical scroll amount
