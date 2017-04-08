@@ -209,15 +209,21 @@ function draw() {
   textAlign(CENTER);
   textFont("Futura");
   textStyle(NORMAL);
+  push();
   translate(width/2,height*3/7);
   rotate(axr);
   text("∞", ax, ay);
+  pop();
   textSize(24);
   textStyle(NORMAL);
-  translate(0,height/7);
+  push();
+  translate(width/2,height/2);
   rotate(bxr);
   text("this website is still in development.", bx, by);
-  image(ig, 0, height*.3, igSize, igSize);
+  pop();
+  push();
+  image(ig, width/2, height*.8, igSize, igSize);
+  pop();
   if (mouseX>width/2-64&&mouseX<width/2+64&&mouseY>height*.8-64&&mouseY<height*.8+64){
     igSize = 162;
   }
