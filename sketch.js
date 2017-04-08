@@ -75,6 +75,22 @@ var movers = [];
 
 var G = 7;
 
+var ig;
+var igSize = 128;
+
+function windowResized(){
+  resizeCanvas(windowWidth, windowHeight);
+}
+
+function link(href, target) {
+  if (target !== undef)  window.open(href, target);
+  else                   window.location = href;
+};
+
+function webpage() {
+    link("p5js.org");
+}
+
 function setup() {
   pixelDensity(1);
   createCanvas(windowWidth, windowHeight);
@@ -83,7 +99,12 @@ function setup() {
   }
   strokeCap(SQUARE);
   colorMode(RGB);
+  ig = loadImage("images/ig.png");
+  
+  imageMode(CENTER);
 }
+
+
 
 function mouseWheel() {
   print(event.delta);
@@ -99,6 +120,9 @@ function mouseWheel() {
     
 function mousePressed(){
   touching = true;
+  if (mouseX>width/2-64&&mouseX<width/2+64&&mouseY>height*.8-64&&mouseY<height*.8+64){
+    window.open("https://www.instagram.com/tksppank/");
+  }
 }
 
 function mouseReleased(){
@@ -155,10 +179,17 @@ function draw() {
   textSize(100);
   fill(255);
   textAlign(CENTER);
-  textFont("Helvetica");
-  textStyle(BOLD);
-  text("SpPAnK.", width/2, height/3);
+  textFont("Futura");
+  textStyle(NORMAL);
+  text("SpPAnK.", width/2, height/5);
   textSize(32);
   textStyle(NORMAL);
-  text("this website is still in development.", width/2, height/2.5);
+  text("this website is still in development.", width/2, height/3.5);
+  image(ig, width/2, height*.8, igSize, igSize);
+  if (mouseX>width/2-64&&mouseX<width/2+64&&mouseY>height*.8-64&&mouseY<height*.8+64){
+    igSize = 162;
+  }
+  else{
+    igSize = 128;
+  }
 }
