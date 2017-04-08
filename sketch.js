@@ -76,6 +76,7 @@ var movers = [];
 var G = 7;
 
 var ig;
+var tw;
 var igSize = 128;
 
 function windowResized(){
@@ -114,6 +115,7 @@ function setup() {
   strokeCap(SQUARE);
   colorMode(RGB);
   ig = loadImage("ig.png");
+  tw = loadImage("tw.png");
   avel = createVector(random(-.1,.1),random(-.1,.1));
   bvel = createVector(random(-.1,.1),random(-.1,.1));
   arot = createVector(random(-.1,.1),random(-.1,.1));
@@ -138,7 +140,10 @@ function mouseWheel() {
 function touchStarted(){
   touching = true;
   if (mouseX>width/2-64&&mouseX<width/2+64&&mouseY>height*.8-64&&mouseY<height*.8+64){
-    window.open("https://www.instagram.com/tksppank/");
+    window.open("https://instagram.com/tksppank/");
+  }
+  if (mouseX>width/2-182&&mouseX<width/2-64&&mouseY>height*.8-64&&mouseY<height*.8+64){
+    window.open("https://twitter.com/SPPANKBEATS");
   }
 }
 
@@ -186,11 +191,9 @@ function draw() {
   var mousey = createVector(mouseX,mouseY);
   var mforce = p5.Vector.sub(movers[i].loc, mousey);
   var md = mforce.mag();
-  //movers[i].decay();
     movers[i].update();
     movers[i].display();
     movers[i].boundaries();
-  
   }
 
   ax += avel.x;
@@ -214,7 +217,7 @@ function draw() {
   rotate(axr);
   text("∞", ax, ay);
   pop();
-  textSize(24);
+  textSize(32);
   textStyle(NORMAL);
   push();
   translate(width/2,height/2);
@@ -223,7 +226,7 @@ function draw() {
   pop();
 
   image(ig, width/2, height*.8, igSize, igSize);
-
+  image(tw, width/2-128, height*.8, igSize, igSize);
   /*if (mouseX>width/2-64&&mouseX<width/2+64&&mouseY>height*.8-64&&mouseY<height*.8+64){
     igSize = 162;
   }
