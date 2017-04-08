@@ -181,7 +181,7 @@ function draw() {
   textAlign(CENTER);
   textFont("Futura");
   textStyle(NORMAL);
-  text("SpPAnK.", width/2, height/5);
+  text("∞", width/2, height/5);
   textSize(32);
   textStyle(NORMAL);
   text("this website is still in development.", width/2, height/3.5);
