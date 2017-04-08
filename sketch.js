@@ -182,7 +182,7 @@ function draw() {
   textFont("Futura");
   textStyle(NORMAL);
   text("∞", width/2, height/5);
-  textSize(32);
+  textSize(24);
   textStyle(NORMAL);
   text("this website is still in development.", width/2, height/3.5);
   image(ig, width/2, height*.8, igSize, igSize);
