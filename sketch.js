@@ -181,10 +181,10 @@ function draw() {
   textAlign(CENTER);
   textFont("Futura");
   textStyle(NORMAL);
-  text("∞", width/2, height/4);
+  text("∞", width/2, height/3);
   textSize(24);
   textStyle(NORMAL);
-  text("this website is still in development.", width/2, height/3);
+  text("this website is still in development.", width/2, height/2);
   image(ig, width/2, height*.8, igSize, igSize);
   if (mouseX>width/2-64&&mouseX<width/2+64&&mouseY>height*.8-64&&mouseY<height*.8+64){
     igSize = 162;
