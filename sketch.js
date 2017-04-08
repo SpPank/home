@@ -134,7 +134,7 @@ function draw() {
         }
         if (d < 350){
           strokeWeight(2000/d);
-          stroke(/*0+i*10*//*200-(d/1.5)*/127-(d*d*.0023),127-(d*d*d*.0005),abs(100-(d/2.5)),255-(d/2));
+          stroke(/*0+i*10*//*200-(d/1.5)*/150-(d*d*.002),150-(d*d*d*.001),abs(100-(d/2)),255-(d/2));
           line(movers[i].loc.x,movers[i].loc.y,movers[j].loc.x,movers[j].loc.y);
         }
   }
