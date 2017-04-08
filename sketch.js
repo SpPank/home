@@ -96,6 +96,15 @@ var bvel;
 var arot;
 var brot;
 
+  var ax = 0; 
+  var ay = 0;
+  var axr= 0; 
+  var ayr= 0;
+  var bx = 0; 
+  var by = 0;
+  var bxr= 0;
+  var byr= 0;
+
 function setup() {
   pixelDensity(1);
   createCanvas(windowWidth, windowHeight);
@@ -136,15 +145,6 @@ function mousePressed(){
 function mouseReleased(){
   touching = false;
 }
-
-var ax = 0; 
-  var ay = 0;
-  var axr= 0; 
-  var ayr= 0;
-  var bx = 0; 
-  var by = 0;
-  var bxr= 0;
-  var byr= 0;
 
 function draw() {
 
