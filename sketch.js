@@ -176,7 +176,7 @@ function draw() {
     movers[i].boundaries();
   
   }
-  textSize(100);
+  textSize(1000);
   fill(255);
   textAlign(CENTER);
   textFont("Futura");
