@@ -107,13 +107,13 @@ var drot;
   var ar = 0; 
   var bx = 0; 
   var by = 0;
-  var br= 0;
+  var br = 0;
   var cx = 0; 
   var cy = 0;
   var cr = 0; 
   var dx = 0; 
   var dy = 0;
-  var dr= 0;
+  var dr = 0;
 
 function setup() {
   pixelDensity(1);
@@ -217,8 +217,8 @@ function draw() {
   by += bvel.y;
   br+= radians(brot);
 
-  cx += dvel.x;
-  cy += dvel.y;
+  cx += cvel.x;
+  cy += cvel.y;
   cr+= radians(crot);
 
   dx += dvel.x;
