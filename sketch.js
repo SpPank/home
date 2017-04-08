@@ -1,5 +1,3 @@
-
-
 var touching = false;
 
 var Mover = function(m, x, y) {
@@ -14,28 +12,29 @@ var Mover = function(m, x, y) {
   };
   this.applyLerp = function(force) {
     var f = p5.Vector.div(force, this.mass);
-    this.vel.add(f);
+    this.acc.add(f);
   };
     
   this.update = function() {
     this.vel.add(this.acc);
     this.loc.add(this.vel);
-    this.acc.mult(0);
-	  this.vel.mult(.995);
-	//this.vel.constrain(this.vel,0,50);
+    this.acc.mult(.9);
+    this.vel.mult(.99);
+  //this.vel.constrain(this.vel,0,50);
   };
   this.decay = function() {
-	  if(this.vel.x > 5){
-		  this.vel.x = 5;
-	  } if(this.vel.y > 5){
-		  this.vel.y = 5;
-	  } 
+    if(this.vel.x > 5){
+      this.vel.x = 5;
+    } if(this.vel.y > 5){
+      this.vel.y = 5;
+    } 
   };
 
   this.display = function() {
+
     noStroke();
-    fill(255);
-    ellipse(this.loc.x, this.loc.y, this.mass, this.mass);
+    fill(random(-2000,2555),200,this.mass*25);
+    ellipse(this.loc.x, this.loc.y, this.mass*2, this.mass*2);
   }; 
 
   this.calculateAttraction = function(m) {
@@ -44,7 +43,7 @@ var Mover = function(m, x, y) {
     // Distance between objects
     var d = force.mag();
     // Limiting the distance to eliminate "extreme" results for very close or very far objects
-    d = constrain(d, 75.0, 150.0);
+    d = constrain(d, 50.0, 200.0);
     // Normalize vector (distance doesn't matter here, we just want this vector for direction                            
     force.normalize();
     // Calculate gravitional force magnitude
@@ -55,23 +54,20 @@ var Mover = function(m, x, y) {
   }
   
   this.lerpy = function(m) {
-	var force = p5.Vector.sub(this.loc, m);
-	var d = force.mag();
-	d = constrain(d, 1.0, 100.0);
-	force.normalize();
+  var force = p5.Vector.sub(this.loc, m);
+  var d = force.mag();
+  d = constrain(d, 75.0, 100.0);
+  force.normalize();
     var strength = (G * this.mass * 20) / (d * d);
-	force.mult(-strength);
+  force.mult(-strength);
     return force;
   }
 
   this.boundaries = function() {
     //this.loc.x = constrain(this.loc.x, this.mass/2, windowWidth-this.mass/2);
     //this.loc.y = constrain(this.loc.y, this.mass/2, windowWHeight-this.mass/2);
-    if (this.loc.x > windowWidth+127 ) {
-      this.loc.x = -127;
-    }
-    if (this.loc.x < -127) {
-      this.loc.x = windowWidth+127;
+    if (this.loc.x > windowWidth || this.loc.x < 0) {
+      this.vel.x *= -1;
     }
     if (this.loc.y > windowHeight+127 ) {
       this.loc.y = -127;
@@ -84,16 +80,16 @@ var Mover = function(m, x, y) {
 
 var movers = [];
 
-var G = 10;
+var G = 7;
 
 function setup() {
   pixelDensity(1);
   createCanvas(windowWidth, windowHeight);
-  for (var i = 0; i < 50; i++) {
+  for (var i = 0; i < 25; i++) {
     movers[i] = new Mover(random(1, 10), random(10,width-10), random(10,height-10));
   }
   strokeCap(SQUARE);
-  
+  colorMode(RGB);
 }
 
 function mouseWheel() {
@@ -109,17 +105,17 @@ function mouseWheel() {
 }
     
 function mousePressed(){
-	touching = true;
+  touching = true;
 }
 
 function mouseReleased(){
-	touching = false;
+  touching = false;
 }
 
 
 function draw() {
-  //background(0,0,0,33.3333);
-  background(0);
+  background(0,34);
+  //background(0);
   for (var i = 0; i < movers.length; i++) {
     for (var j = 0; j < movers.length; j++) {
       if (i !== j) {
@@ -130,36 +126,35 @@ function draw() {
           //movers[j].applyForce(force);
           //force.mult(512000/(d*movers[j].mass));
         }
-        if (d < 255 && d > 127){
+        if (d < 300 && d > 127){
           var force = movers[j].calculateAttraction(movers[i]);
           movers[i].applyForce(force);
           //movers[i].applyLerp(force);
         }
-        if (d < 255){
-          strokeWeight(50000/d/d);
-          stroke(255,255,255,255-d);
+        if (d < 350){
+          strokeWeight(2000/d);
+          stroke(/*0+i*10*/255-d,/*200-(d/1.5)*/255-(d*d*.1),100-(d/4),255-(d/1.5));
           line(movers[i].loc.x,movers[i].loc.y,movers[j].loc.x,movers[j].loc.y);
         }
-	}
-	if(touching == true){
-		//var force = movers[i].lerpy(mousey);
-		//movers[i].applyLerp(force);
-		//movers[i].loc.lerp(mousey,md*.001/(movers[j].mass));
-		movers[i].loc.lerp(mousey,.1/md*movers[i].mass);
-		//movers[i].vel.mult(.1/(d*movers[j].mass));
-		movers[i].loc.lerp(touches[0],.1/md*movers[i].mass);
-		 
+  }
+  if(touching == true){
+    //var force = movers[i].lerpy(mousey);
+    //movers[i].applyLerp(force);
+    //movers[i].loc.lerp(mousey,md*.001/(movers[j].mass));
+    movers[i].loc.lerp(mousey,.05/md*movers[i].mass);
+    //movers[i].vel.mult(.1/(d*movers[j].mass));
+    movers[i].loc.lerp(touches[0],.1/md*movers[i].mass);
+     
       }
-	  
+    
     }
-	var mousey = createVector(mouseX,mouseY);
-	var mforce = p5.Vector.sub(movers[i].loc, mousey);
-	var md = mforce.mag();
-	movers[i].decay();
+  var mousey = createVector(mouseX,mouseY);
+  var mforce = p5.Vector.sub(movers[i].loc, mousey);
+  var md = mforce.mag();
+  //movers[i].decay();
     movers[i].update();
     movers[i].display();
     movers[i].boundaries();
-	
+  
   }
 }
-
