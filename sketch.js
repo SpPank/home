@@ -165,4 +165,7 @@ function draw() {
   textFont("Helvetica");
   textStyle(BOLD);
   text("SpPAnK.", width/2, height/3);
+  textSize(32);
+  textStyle(NORMAL);
+  text("this website is still in development.", width/2, height/2.5);
 }
