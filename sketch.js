@@ -56,7 +56,7 @@ var Mover = function(m, x, y) {
   this.lerpy = function(m) {
   var force = p5.Vector.sub(this.loc, m);
   var d = force.mag();
-  d = constrain(d, 75.0, 100.0);
+  d = constrain(d, 50.0, 200);
   force.normalize();
     var strength = (G * this.mass * 20) / (d * d);
   force.mult(-strength);
@@ -114,7 +114,8 @@ function mouseReleased(){
 
 
 function draw() {
-  background(0,34);
+
+  background(0,33.33);
   //background(0);
   for (var i = 0; i < movers.length; i++) {
     for (var j = 0; j < movers.length; j++) {
@@ -133,7 +134,7 @@ function draw() {
         }
         if (d < 350){
           strokeWeight(2000/d);
-          stroke(/*0+i*10*/255-d,/*200-(d/1.5)*/255-(d*d*.1),100-(d/4),255-(d/1.5));
+          stroke(/*0+i*10*//*200-(d/1.5)*/127-(d*d*.007),127-(d*d*d*.001),abs(100-(d/2.5)),255-(d/2));
           line(movers[i].loc.x,movers[i].loc.y,movers[j].loc.x,movers[j].loc.y);
         }
   }
