@@ -135,14 +135,14 @@ function mouseWheel() {
   //return false;
 }
     
-function mousePressed(){
+function touchStarted(){
   touching = true;
   if (mouseX>width/2-64&&mouseX<width/2+64&&mouseY>height*.8-64&&mouseY<height*.8+64){
     window.open("https://www.instagram.com/tksppank/");
   }
 }
 
-function mouseReleased(){
+function touchEnded(){
   touching = false;
 }
 
@@ -221,13 +221,13 @@ function draw() {
   rotate(bxr);
   text("this website is still in development.", bx, by);
   pop();
-  
+
   image(ig, width/2, height*.8, igSize, igSize);
 
-  if (mouseX>width/2-64&&mouseX<width/2+64&&mouseY>height*.8-64&&mouseY<height*.8+64){
+  /*if (mouseX>width/2-64&&mouseX<width/2+64&&mouseY>height*.8-64&&mouseY<height*.8+64){
     igSize = 162;
   }
   else{
     igSize = 128;
-  }
+  }*/
 }
