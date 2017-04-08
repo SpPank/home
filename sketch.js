@@ -204,17 +204,17 @@ function draw() {
   byr+= radians(brot.y);
 
 
-  textSize(300);
+  textSize(500);
   fill(255);
   textAlign(CENTER);
   textFont("Futura");
   textStyle(NORMAL);
-  translate(width/2,height/3);
+  translate(width/2,height*3/7);
   rotate(axr);
   text("∞", ax, ay);
   textSize(24);
   textStyle(NORMAL);
-  translate(0,height/5);
+  translate(0,height/7);
   rotate(bxr);
   text("this website is still in development.", bx, by);
   image(ig, width/2, height*.8, igSize, igSize);
