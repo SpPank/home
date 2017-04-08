@@ -116,6 +116,7 @@ function mouseReleased(){
 function draw() {
 
   background(0,33.33);
+  
   //background(0);
   for (var i = 0; i < movers.length; i++) {
     for (var j = 0; j < movers.length; j++) {
@@ -158,4 +159,10 @@ function draw() {
     movers[i].boundaries();
   
   }
+  textSize(100);
+  fill(255);
+  textAlign(CENTER);
+  textFont("Helvetica");
+  textStyle(BOLD);
+  text("SpPAnK.", width/2, height/3);
 }
