@@ -93,18 +93,27 @@ function webpage() {
 }
 
 var avel;
-var bvel;
 var arot;
+var bvel;
 var brot;
+var cvel;
+var crot;
+var dvel;
+var drot;
+
 
   var ax = 0; 
   var ay = 0;
-  var axr= 0; 
-  var ayr= 0;
+  var ar = 0; 
   var bx = 0; 
   var by = 0;
-  var bxr= 0;
-  var byr= 0;
+  var br= 0;
+  var cx = 0; 
+  var cy = 0;
+  var cr = 0; 
+  var dx = 0; 
+  var dy = 0;
+  var dr= 0;
 
 function setup() {
   pixelDensity(1);
@@ -118,8 +127,12 @@ function setup() {
   tw = loadImage("tw.png");
   avel = createVector(random(-.1,.1),random(-.1,.1));
   bvel = createVector(random(-.1,.1),random(-.1,.1));
-  arot = createVector(random(-.1,.1),random(-.1,.1));
-  brot = createVector(random(-.1,.1),random(-.1,.1));
+  cvel = createVector(random(-.1,.1),random(-.1,.1));
+  dvel = createVector(random(-.1,.1),random(-.1,.1));
+  arot = random(-.1,.1);
+  brot = random(-.1,.1);
+  crot = random(-.1,.1);
+  drot = random(-.1,.1);
   imageMode(CENTER);
 }
 
@@ -198,31 +211,47 @@ function draw() {
 
   ax += avel.x;
   ay += avel.y;
-  axr+= radians(arot.x);
-  ayr+= radians(arot.y);
+  ar+= radians(arot);
 
   bx += bvel.x;
   by += bvel.y;
-  bxr+= radians(brot.x);
-  byr+= radians(brot.y);
+  br+= radians(brot);
+
+  cx += dvel.x;
+  cy += dvel.y;
+  cr+= radians(crot);
+
+  dx += dvel.x;
+  dy += dvel.y;
+  dr+= radians(drot);
 
 
-  textSize(500);
+  textSize(300);
   fill(255);
   textAlign(CENTER);
   textFont("Futura");
   textStyle(NORMAL);
   push();
-  translate(width/2,height*3/7);
-  rotate(axr);
-  text("∞", ax, ay);
+  translate(width/2,height*2/5);
+  rotate(ar);
+  text("Hi", ax, ay);
   pop();
-  textSize(32);
+  textSize(48);
   textStyle(NORMAL);
   push();
+  translate(width*3/7,height/2);
+  rotate(br);
+  text("i", bx, by);
+  pop();
+  push();
   translate(width/2,height/2);
-  rotate(bxr);
-  text("this website is still in development.", bx, by);
+  rotate(cr);
+  text("Love", cx, cy);
+  pop();
+  push();
+  translate(width*3/5,height/2);
+  rotate(dr);
+  text("you", dx, dy);
   pop();
 
   image(ig, width/2, height*.8, igSize, igSize);
