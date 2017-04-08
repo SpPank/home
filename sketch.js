@@ -217,7 +217,7 @@ function draw() {
   translate(0,height/7);
   rotate(bxr);
   text("this website is still in development.", bx, by);
-  image(ig, width/2, height*.8, igSize, igSize);
+  image(ig, 0, height*.3, igSize, igSize);
   if (mouseX>width/2-64&&mouseX<width/2+64&&mouseY>height*.8-64&&mouseY<height*.8+64){
     igSize = 162;
   }
