@@ -22,13 +22,6 @@ var Mover = function(m, x, y) {
     this.vel.mult(.99);
   //this.vel.constrain(this.vel,0,50);
   };
-  this.decay = function() {
-    if(this.vel.x > 5){
-      this.vel.x = 5;
-    } if(this.vel.y > 5){
-      this.vel.y = 5;
-    } 
-  };
 
   this.display = function() {
 
@@ -43,7 +36,7 @@ var Mover = function(m, x, y) {
     // Distance between objects
     var d = force.mag();
     // Limiting the distance to eliminate "extreme" results for very close or very far objects
-    d = constrain(d, 50.0, 200.0);
+    d = constrain(d, 10.0, 500.0);
     // Normalize vector (distance doesn't matter here, we just want this vector for direction                            
     force.normalize();
     // Calculate gravitional force magnitude
@@ -56,7 +49,7 @@ var Mover = function(m, x, y) {
   this.lerpy = function(m) {
   var force = p5.Vector.sub(this.loc, m);
   var d = force.mag();
-  d = constrain(d, 50.0, 200);
+  d = constrain(d, 5.0, 500);
   force.normalize();
     var strength = (G * this.mass * 20) / (d * d);
   force.mult(-strength);
@@ -85,11 +78,17 @@ var G = 7;
 function setup() {
   pixelDensity(1);
   createCanvas(windowWidth, windowHeight);
-  for (var i = 0; i < 25; i++) {
+  for (var i = 0; i < 30; i++) {
     movers[i] = new Mover(random(1, 10), random(10,width-10), random(10,height-10));
   }
   strokeCap(SQUARE);
   colorMode(RGB);
+}
+
+function touchMoved() {
+  ellipse(mouseX, mouseY, 5, 5);
+  // prevent default
+  return false;
 }
 
 function mouseWheel() {
