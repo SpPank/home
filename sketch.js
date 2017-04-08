@@ -221,9 +221,9 @@ function draw() {
   rotate(bxr);
   text("this website is still in development.", bx, by);
   pop();
-  push();
+  
   image(ig, width/2, height*.8, igSize, igSize);
-  pop();
+
   if (mouseX>width/2-64&&mouseX<width/2+64&&mouseY>height*.8-64&&mouseY<height*.8+64){
     igSize = 162;
   }
