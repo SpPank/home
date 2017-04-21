@@ -153,7 +153,7 @@ function mouseWheel() {
 function touchStarted(){
   touching = true;
   if (mouseX>width/2-64&&mouseX<width/2+64&&mouseY>height*.8-64&&mouseY<height*.8+64){
-    window.open("https://instagram.com/tksppank/");
+    window.open("https://instagram.com/sppankvisuals/");
   }
   if (mouseX>width/2-182&&mouseX<width/2-64&&mouseY>height*.8-64&&mouseY<height*.8+64){
     window.open("https://twitter.com/SPPANKBEATS");
