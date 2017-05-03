@@ -1,5 +1,26 @@
 var touching = false;
 
+var target;
+var popmax;
+var mutationRate;
+var population;
+
+this.displayInfo = function(){
+  var answer = population.getBest();
+  textSize(100);
+  fill(255);
+  textAlign(CENTER);
+  textFont("Courier");
+  textStyle(NORMAL);
+  push();
+  translate(width/2,height*2/5);
+    text(answer + ".", 0, 0);
+  pop();
+}
+
+
+
+
 var Mover = function(m, x, y) {
   this.mass = m;
   this.loc = createVector(x, y);
@@ -92,31 +113,9 @@ function webpage() {
     link("p5js.org");
 }
 
-var avel;
-var arot;
-var bvel;
-var brot;
-var cvel;
-var crot;
-var dvel;
-var drot;
-
-
-  var ax = 0; 
-  var ay = 0;
-  var ar = 0; 
-  var bx = 0; 
-  var by = 0;
-  var br = 0;
-  var cx = 0; 
-  var cy = 0;
-  var cr = 0; 
-  var dx = 0; 
-  var dy = 0;
-  var dr = 0;
 
 function setup() {
-  pixelDensity(1);
+  pixelDensity(2);
   createCanvas(windowWidth, windowHeight);
   for (var i = 0; i < 30; i++) {
     movers[i] = new Mover(random(1, 10), random(10,width-10), random(10,height-10));
@@ -134,6 +133,11 @@ function setup() {
   crot = random(-.1,.1);
   drot = random(-.1,.1);
   imageMode(CENTER);
+
+  target = "SpPank";
+  popmax = 100;
+  mutationRate = 0.15;
+  population = new Population(target, mutationRate, popmax);
 }
 
 
@@ -166,7 +170,7 @@ function touchEnded(){
 
 function draw() {
 
-  background(0,33.33);
+  background(0);
   
   //background(0);
   for (var i = 0; i < movers.length; i++) {
@@ -209,50 +213,25 @@ function draw() {
     movers[i].boundaries();
   }
 
-  ax += avel.x;
-  ay += avel.y;
-  ar+= radians(arot);
+  population.naturalSelection();
+  //Create next generation
+  population.generate();
+  // Calculate fitness
+  population.calcFitness();
 
-  bx += bvel.x;
-  by += bvel.y;
-  br+= radians(brot);
+  population.evaluate();
 
-  cx += cvel.x;
-  cy += cvel.y;
-  cr+= radians(crot);
+  displayInfo();
 
-  dx += dvel.x;
-  dy += dvel.y;
-  dr+= radians(drot);
-
-
-  textSize(300);
-  fill(255);
-  textAlign(CENTER);
-  textFont("Futura");
-  textStyle(NORMAL);
-  push();
-  translate(width/2,height*2/5);
-  rotate(ar);
-  text("Hi", ax, ay);
-  pop();
-  textSize(48);
-  textStyle(NORMAL);
-  push();
-  translate(width*3/7,height/2);
-  rotate(br);
-  text("i", bx, by);
-  pop();
-  push();
-  translate(width/2,height/2);
-  rotate(cr);
-  text("Love", cx, cy);
-  pop();
-  push();
-  translate(width*3/5,height/2);
-  rotate(dr);
-  text("you", dx, dy);
-  pop();
+  // textSize(100);
+  // fill(255);
+  // textAlign(CENTER);
+  // textFont("Courier");
+  // textStyle(NORMAL);
+  // push();
+  // translate(width/2,height*2/5);
+  // text("Hi", 0, 0);
+  // pop();
 
   image(ig, width/2, height*.8, igSize, igSize);
   image(tw, width/2-128, height*.8, igSize, igSize);
