@@ -13,7 +13,7 @@ this.displayInfo = function(){
   textFont("Courier");
   textStyle(NORMAL);
   push();
-  translate(width/2,height*2/5);
+  translate(width/2,height*1/5);
     text(" " + answer + ".", 0, 0);
   pop();
 }
