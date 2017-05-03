@@ -177,6 +177,10 @@ function draw() {
 
   background(0);
   
+  image(ig, width/2, height*.8, igSize, igSize);
+  image(tw, width/2-128, height*.8, igSize, igSize);
+  image(tb, width/2+128, height*.8, igSize*2, igSize*2);
+  
   //background(0);
   for (var i = 0; i < movers.length; i++) {
     for (var j = 0; j < movers.length; j++) {
@@ -227,8 +231,4 @@ function draw() {
   population.evaluate();
 
   displayInfo();
-
-  image(ig, width/2, height*.8, igSize, igSize);
-  image(tw, width/2-128, height*.8, igSize, igSize);
-  image(tb, width/2+128, height*.8, igSize*2, igSize*2);
 }
