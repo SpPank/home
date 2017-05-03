@@ -14,7 +14,7 @@ this.displayInfo = function(){
   textStyle(NORMAL);
   push();
   translate(width/2,height*2/5);
-    text(answer + ".", 0, 0);
+    text(" " + answer + ".", 0, 0);
   pop();
 }
 
