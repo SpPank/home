@@ -9,12 +9,13 @@ this.displayInfo = function(){
   var answer = population.getBest();
   textSize(150);
   fill(255);
+  noStroke();
   textAlign(CENTER);
   textFont("Courier");
   textStyle(NORMAL);
   push();
   translate(width/2,height*1/4);
-    text(" " + answer + ".", 0, 0);
+    text(answer, 0, 0);
   pop();
 }
 
@@ -174,6 +175,13 @@ function touchEnded(){
 }
 
 function draw() {
+
+  var h = random(10);
+  if (h > 9){
+    blendMode(DIFFERENCE);
+  } else {
+    blendMode(BLEND);
+  }
 
   background(0);
   
