@@ -95,7 +95,7 @@ var Mover = function(m, x, y) {
 
 var movers = [];
 
-var G = 3;
+var G = 7;
 
 var ig;
 var tw;
@@ -117,7 +117,6 @@ function webpage() {
 
 
 function setup() {
-  pixelDensity(2);
   createCanvas(windowWidth, windowHeight);
   for (var i = 0; i < 32; i++) {
     movers[i] = new Mover(random(5, 10), random(10,width-10), random(10,height-10));
