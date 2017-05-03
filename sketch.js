@@ -230,5 +230,5 @@ function draw() {
 
   image(ig, width/2, height*.8, igSize, igSize);
   image(tw, width/2-128, height*.8, igSize, igSize);
-  image(tb, width/2+100, height*.8, igSize*3, igSize*3);
+  image(tb, width/2+100, height*.8, igSize*2, igSize*2);
 }
