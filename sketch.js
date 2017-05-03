@@ -13,7 +13,7 @@ this.displayInfo = function(){
   textFont("Courier");
   textStyle(NORMAL);
   push();
-  translate(width/2,height*1/5);
+  translate(width/2,height*1/4);
     text(" " + answer + ".", 0, 0);
   pop();
 }
@@ -230,5 +230,5 @@ function draw() {
 
   image(ig, width/2, height*.8, igSize, igSize);
   image(tw, width/2-128, height*.8, igSize, igSize);
-  image(tb, width/2+100, height*.8, igSize*2, igSize*2);
+  image(tb, width/2+100, height*.8, igSize*3, igSize*3);
 }
