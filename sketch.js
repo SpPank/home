@@ -175,16 +175,20 @@ function touchEnded(){
   touching = false;
 }
 
+var p = 0;
+
 function draw() {
 
   var h = random(10);
   if (h > 9){
     blendMode(DIFFERENCE);
+    p = 255;
   } else {
     blendMode(BLEND);
+    p -= 5;
   }
 
-  background(0);
+  background(0, 255-p);
   
   image(ig, width/2, height*.8, igSize, igSize);
   image(tw, width/2-128, height*.8, igSize, igSize);
