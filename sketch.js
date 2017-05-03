@@ -240,7 +240,7 @@ function draw() {
 
   image(ig, width/2, height*.8, igSize, igSize);
   image(tw, width/2-128, height*.8, igSize, igSize);
-  image(tb, width/2+128, height*.8, tb.width, tb.height);
+  image(tb, width/2+100, height*.8, tb.width, tb.height);
   /*if (mouseX>width/2-64&&mouseX<width/2+64&&mouseY>height*.8-64&&mouseY<height*.8+64){
     igSize = 162;
   }
