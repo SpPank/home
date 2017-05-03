@@ -139,7 +139,7 @@ function setup() {
 
   target = "SpPank";
   popmax = 100;
-  mutationRate = 0.15;
+  mutationRate = 0.1;
   population = new Population(target, mutationRate, popmax);
   frameRate(32);
 }
