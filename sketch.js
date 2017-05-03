@@ -164,7 +164,7 @@ function touchStarted(){
   if (mouseX>width/2-182&&mouseX<width/2-64&&mouseY>height*.8-64&&mouseY<height*.8+64){
     window.open("https://twitter.com/SPPANKBEATS");
   }
-  if (mouseX>width/2+64&&mouseX<width/2+182&&mouseY>height*.8-64&&mouseY<height*.8+64){
+  if (mouseX>width/2+65&&mouseX<width/2+182&&mouseY>height*.8-64&&mouseY<height*.8+64){
     window.open("https://sppankit.tumblr.com/");
   }
 }
@@ -228,23 +228,7 @@ function draw() {
 
   displayInfo();
 
-  // textSize(100);
-  // fill(255);
-  // textAlign(CENTER);
-  // textFont("Courier");
-  // textStyle(NORMAL);
-  // push();
-  // translate(width/2,height*2/5);
-  // text("Hi", 0, 0);
-  // pop();
-
   image(ig, width/2, height*.8, igSize, igSize);
   image(tw, width/2-128, height*.8, igSize, igSize);
   image(tb, width/2+100, height*.8, tb.width, tb.height);
-  /*if (mouseX>width/2-64&&mouseX<width/2+64&&mouseY>height*.8-64&&mouseY<height*.8+64){
-    igSize = 162;
-  }
-  else{
-    igSize = 128;
-  }*/
 }
