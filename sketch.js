@@ -95,7 +95,7 @@ var Mover = function(m, x, y) {
 
 var movers = [];
 
-var G = 7;
+var G = 3;
 
 var ig;
 var tw;
@@ -119,8 +119,8 @@ function webpage() {
 function setup() {
   pixelDensity(2);
   createCanvas(windowWidth, windowHeight);
-  for (var i = 0; i < 30; i++) {
-    movers[i] = new Mover(random(1, 10), random(10,width-10), random(10,height-10));
+  for (var i = 0; i < 32; i++) {
+    movers[i] = new Mover(random(5, 10), random(10,width-10), random(10,height-10));
   }
   strokeCap(SQUARE);
   colorMode(RGB);
@@ -141,6 +141,7 @@ function setup() {
   popmax = 100;
   mutationRate = 0.15;
   population = new Population(target, mutationRate, popmax);
+  frameRate(32);
 }
 
 
@@ -194,13 +195,13 @@ function draw() {
     for (var j = 0; j < movers.length; j++) {
       if (i !== j) {
         var d = dist(movers[i].loc.x,movers[i].loc.y,movers[j].loc.x,movers[j].loc.y);
-        if (d < 127){
+        if (d < 64){
           var force = movers[j].calculateAttraction(movers[i]);
           movers[j].applyLerp(force);
           //movers[j].applyForce(force);
           //force.mult(512000/(d*movers[j].mass));
         }
-        if (d < 300 && d > 127){
+        if (d < 127 && d > 64){
           var force = movers[j].calculateAttraction(movers[i]);
           movers[i].applyForce(force);
           //movers[i].applyLerp(force);
@@ -215,9 +216,9 @@ function draw() {
     //var force = movers[i].lerpy(mousey);
     //movers[i].applyLerp(force);
     //movers[i].loc.lerp(mousey,md*.001/(movers[j].mass));
-    movers[i].loc.lerp(mousey,.2/md);
+    movers[i].loc.lerp(mousey,.25/md);
     //movers[i].vel.mult(.1/(d*movers[j].mass));
-    movers[i].loc.lerp(touches[0],.4/md);
+    movers[i].loc.lerp(touches[0],.5/md);
      
       }
     
