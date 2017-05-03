@@ -98,6 +98,7 @@ var G = 7;
 
 var ig;
 var tw;
+var tb;
 var igSize = 128;
 
 function windowResized(){
@@ -124,6 +125,7 @@ function setup() {
   colorMode(RGB);
   ig = loadImage("ig.png");
   tw = loadImage("tw.png");
+  tb = loadImage("tb.png");
   avel = createVector(random(-.1,.1),random(-.1,.1));
   bvel = createVector(random(-.1,.1),random(-.1,.1));
   cvel = createVector(random(-.1,.1),random(-.1,.1));
@@ -235,6 +237,7 @@ function draw() {
 
   image(ig, width/2, height*.8, igSize, igSize);
   image(tw, width/2-128, height*.8, igSize, igSize);
+  image(tb, width/2+128, height*.8, igSize, igSize);
   /*if (mouseX>width/2-64&&mouseX<width/2+64&&mouseY>height*.8-64&&mouseY<height*.8+64){
     igSize = 162;
   }
