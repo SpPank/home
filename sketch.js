@@ -187,7 +187,7 @@ function draw() {
     p -= 5;
   }
 
-  background(0, 255-p);
+  background(0);
   
   image(ig, width/2, height*.8, igSize, igSize);
   image(tw, width/2-128, height*.8, igSize, igSize);
