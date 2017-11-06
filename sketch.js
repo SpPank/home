@@ -7,7 +7,7 @@ var population;
 
 this.displayInfo = function(){
   var answer = population.getBest();
-  textSize(150);
+  textSize(100);
   fill(255);
   noStroke();
   textAlign(CENTER);
@@ -138,9 +138,8 @@ function setup() {
 
   target = "Taylor J. Knapps";
   popmax = 100;
-  mutationRate = 0.1;
+  mutationRate = 0.2;
   population = new Population(target, mutationRate, popmax);
-  frameRate(32);
 }
 
 
