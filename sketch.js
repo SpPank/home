@@ -7,7 +7,7 @@ var population;
 
 this.displayInfo = function(){
   var answer = population.getBest();
-  textSize(50);
+  textSize(100);
   fill(255);
   noStroke();
   textAlign(CENTER);
