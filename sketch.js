@@ -138,7 +138,7 @@ function setup() {
 
   target = "Taylor J Knapps";
   popmax = 200;
-  mutationRate = 0.01;
+  mutationRate = 0.1;
   population = new Population(target, mutationRate, popmax);
 }
 
