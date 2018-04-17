@@ -162,7 +162,7 @@ function touchStarted(){
     window.open("https://instagram.com/taylorknapps/");
   }
   if (mouseX>width/2-182&&mouseX<width/2-64&&mouseY>height*.8-64&&mouseY<height*.8+64){
-    window.open("https://twitter.com/SPPANKBEATS");
+    window.open("https://twitter.com/taylorjknapps");
   }
   if (mouseX>width/2+65&&mouseX<width/2+182&&mouseY>height*.8-64&&mouseY<height*.8+64){
     window.open("https://sppankit.tumblr.com/");
