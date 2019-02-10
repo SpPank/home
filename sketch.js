@@ -136,9 +136,9 @@ function setup() {
   drot = random(-.1,.1);
   imageMode(CENTER);
 
-  target = "taylorknapps";
+  target = "Taylor Knapps";
   popmax = 150;
-  mutationRate = 0.015;
+  mutationRate = 0.02;
   population = new Population(target, mutationRate, popmax);
 }
 
