@@ -137,7 +137,7 @@ function setup() {
   imageMode(CENTER);
 
   target = "Taylor J Knapps";
-  popmax = 100;
+  popmax = 30;
   mutationRate = 0.1;
   population = new Population(target, mutationRate, popmax);
 }
